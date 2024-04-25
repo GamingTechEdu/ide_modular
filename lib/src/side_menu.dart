@@ -314,9 +314,9 @@ class _SideMenuState extends State<SideMenu> with SideMenuWidthMixin {
         if (widget.position == SideMenuPosition.left) {
           //dx: me retorna a posição X(Horizontal)
           x = details.globalPosition.dx;
-          print("x => $x");
         } else {
           x = MediaQuery.of(context).size.width - details.globalPosition.dx;
+         print("x => $x");
         }
         if (x >= widget.minWidth && x <= widget.maxWidth) {
           setState(() {
