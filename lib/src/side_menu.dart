@@ -180,8 +180,6 @@ class _SideMenuState extends State<SideMenu> with SideMenuWidthMixin {
     });
   }
 
-
-
   ///Ao ser chamado alterna entre o fechamento e abertura do menu
   ///#### Lógica:
   /// - Caso o valor de `_currentWidth` for igual ao valor de `widget.minWidth`, será considerado uma lógica verdadeira
@@ -193,8 +191,6 @@ class _SideMenuState extends State<SideMenu> with SideMenuWidthMixin {
           _currentWidth == widget.minWidth ? widget.maxWidth : widget.minWidth;
     });
   }
-
-
 
   ///Função que avisa quando algo muda ou seja ele notifica o widget de que algo que ele precisa mudou
   ///e se atualiza de acordo é comom se fosse um listener(ouvinte), neste caso sempre que as dependências
@@ -313,10 +309,12 @@ class _SideMenuState extends State<SideMenu> with SideMenuWidthMixin {
     return Resizer(
       data: widget.resizerData,
       onPanUpdate: (details) {
+        print("details => $details");
         late final double x;
         if (widget.position == SideMenuPosition.left) {
           //dx: me retorna a posição X(Horizontal)
           x = details.globalPosition.dx;
+          print("x => $x");
         } else {
           x = MediaQuery.of(context).size.width - details.globalPosition.dx;
         }
