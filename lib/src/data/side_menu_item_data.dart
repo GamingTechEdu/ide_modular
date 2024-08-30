@@ -53,7 +53,7 @@ class SideMenuItemDataTile extends SideMenuItemData {
     this.selectedTitleStyle,
     this.tooltip,
     this.badgeContent,
-    this.hasSelectedLine = true,
+    this.hasSelectedLine = false,
     this.selectedLineSize = const Size(
       Constants.itemSelectedLineWidth,
       Constants.itemSelectedLineHeight,
