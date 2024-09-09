@@ -1,4 +1,5 @@
 import 'package:badges/badges.dart';
+import 'package:fluent_ui/fluent_ui.dart' as fluent_ui;
 import 'package:flutter/material.dart';
 
 import '../item/side_menu_item_admin.dart';
@@ -111,4 +112,10 @@ class SideMenuItemDataDivider extends SideMenuItemData {
 
   final Divider divider;
   final EdgeInsetsDirectional padding;
+}
+
+class FluentTreeViewItemData extends SideMenuItemData {
+  final List<fluent_ui.TreeViewItem> treeViewItems;
+
+  FluentTreeViewItemData(this.treeViewItems);
 }

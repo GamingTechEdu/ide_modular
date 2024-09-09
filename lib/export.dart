@@ -12,7 +12,7 @@ export 'src/data/side_menu_item_data.dart';
 export 'src/data/resizer_toggle_data.dart';
 export 'src/data/resizer_data.dart';
 export 'src/item/side_menu_item_admin.dart';
-export 'src/item/side_menu_item_tile_drag.dart';
+export 'src/item/side_menu_item_tree_view.dart';
 
 
 

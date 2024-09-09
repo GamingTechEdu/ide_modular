@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import '../data/side_menu_item_data.dart';
 import 'side_menu_item_admin.dart';
 
-class SideMenuItemTileDrag extends StatelessWidget {
+class SideMenuItemTreeView extends StatelessWidget {
   final SideMenuItemDataTileDrag data;
 
-  const SideMenuItemTileDrag({super.key, required this.data});
+  const SideMenuItemTreeView({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class SideMenuItemTileDrag extends StatelessWidget {
 
     int index = 0;
     final childrenTiles = item.children.map((child) {
-      return SideMenuItemTileDrag(
+      return SideMenuItemTreeView(
         data: data,
       );
     }).toList();

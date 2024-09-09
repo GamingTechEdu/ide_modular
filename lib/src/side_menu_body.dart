@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 
 import 'data/side_menu_data.dart';
 import 'data/side_menu_item_data.dart';
 import 'item/export.dart';
-import 'item/side_menu_item_tile_drag.dart';
+import 'item/side_menu_item_tree_view.dart';
 
 ///Constrói o corpo do meu menu.
 class SideMenuBody extends StatelessWidget {
@@ -37,7 +37,7 @@ class SideMenuBody extends StatelessWidget {
                   data: item,
                 );
               } else if (item is SideMenuItemDataTileDrag) {
-                return SideMenuItemTileDrag(
+                return SideMenuItemTreeView(
                   data: item,
                 );
               } else if (item is SideMenuItemDataTitle) {
@@ -47,6 +47,10 @@ class SideMenuBody extends StatelessWidget {
               } else if (item is SideMenuItemDataDivider) {
                 return SideMenuItemDivider(
                   data: item,
+                );
+              } else if (item is FluentTreeViewItemData) {
+                return TreeView(
+                  items: item.treeViewItems,
                 );
               }
               return const SizedBox.shrink();
