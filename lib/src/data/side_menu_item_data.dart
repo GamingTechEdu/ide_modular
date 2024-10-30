@@ -13,7 +13,7 @@ abstract class SideMenuItemData {
 class SideMenuItemDataTileDrag extends SideMenuItemData {
   final List<AdminMenuItem> items;
   final int index;
-  // final void Function(bool) onTap;
+  final void Function(bool) onTap;
   final void Function(AdminMenuItem item)? onSelected;
   final String selectedRoute;
   final int depth;
@@ -27,7 +27,7 @@ class SideMenuItemDataTileDrag extends SideMenuItemData {
   bool get isLast => index == items.length - 1;
 
   const SideMenuItemDataTileDrag({
-    // required this.onTap,
+    required this.onTap,
     required this.items,
     required this.index,
     this.onSelected,

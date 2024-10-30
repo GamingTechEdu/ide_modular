@@ -14,6 +14,7 @@ class SideMenuItemTreeView extends StatelessWidget {
     if (data.depth > 0 && data.isLast) {
       return _buildTiles(context, data.items[data.index]);
     }
+
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -45,7 +46,6 @@ class SideMenuItemTreeView extends StatelessWidget {
       );
     }
 
-    int index = 0;
     final childrenTiles = item.children.map((child) {
       return SideMenuItemTreeView(
         data: data,
@@ -57,8 +57,7 @@ class SideMenuItemTreeView extends StatelessWidget {
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         onExpansionChanged: (value) {
-          // data.onTap(value);
-          print("object");
+          data.onTap(value);
         },
         tilePadding: _getTilePadding(data.depth),
         leading: _buildIcon(item.icon),
