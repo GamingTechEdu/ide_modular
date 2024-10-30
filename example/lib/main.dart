@@ -169,6 +169,7 @@ class _SideMenuIdeState extends State<SideMenuIde> {
                       ],
                     )
                   ],
+                  footer: const MenuUser(),
                 );
               },
             ),
@@ -177,6 +178,65 @@ class _SideMenuIdeState extends State<SideMenuIde> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+
+List<AdminMenuItem> adminMenuItems = [
+  AdminMenuItem(
+    title: 'Sobre',
+    icon: Icons.info,
+    onTap: () => print("Teste"),
+  ),
+];
+
+class MenuUser extends StatelessWidget {
+  const MenuUser({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 50,
+      width: double.infinity,
+      child: PopupMenuButton<AdminMenuItem>(
+        tooltip: "Configurações",
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        color: const Color.fromARGB(255, 255, 255, 255),
+        elevation: 4,
+        offset: const Offset(0, 50),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        child: const Icon(
+          Icons.account_circle,
+          size: 40,
+        ),
+        itemBuilder: (context) {
+          return adminMenuItems.map((AdminMenuItem item) {
+            return PopupMenuItem<AdminMenuItem>(
+              value: item,
+              child: Row(
+                children: [
+                  Icon(
+                    item.icon,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text(
+                      item.title,
+                      style: const TextStyle(
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                  
+                ],
+              ),
+            );
+          }).toList();
+        },
       ),
     );
   }

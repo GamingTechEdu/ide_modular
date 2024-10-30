@@ -10,7 +10,6 @@ class SideMenuItemTreeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     if (data.depth > 0 && data.isLast) {
       return _buildTiles(context, data.items[data.index]);
     }
@@ -29,7 +28,7 @@ class SideMenuItemTreeView extends StatelessWidget {
 
   Widget _buildTiles(BuildContext context, AdminMenuItem item) {
     bool selected = _isSelected(data.selectedRoute, [item]);
-   
+
     if (item.children.isEmpty) {
       return ListTile(
         contentPadding: _getTilePadding(data.depth),
@@ -53,7 +52,6 @@ class SideMenuItemTreeView extends StatelessWidget {
     }).toList();
 
     return Theme(
-      
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
         onExpansionChanged: (value) {
