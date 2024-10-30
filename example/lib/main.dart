@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:ide_modular/export.dart';
 
 void main() {
@@ -89,7 +90,7 @@ class _SideMenuIdeState extends State<SideMenuIde> {
               maxWidth: 150,
               hasResizer: false,
               mode: screen < 1200 ? SideMenuMode.compact : SideMenuMode.open,
-              hasResizerToggle: false,
+              hasResizerToggle: true,
               controller: controller,
               backgroundColor: const Color.fromARGB(255, 255, 255, 255),
               builder: (data) {
