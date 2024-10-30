@@ -38,7 +38,6 @@ class SideMenuItemTreeView extends StatelessWidget {
         tileColor: data.backgroundColor,
         selectedTileColor: data.activeBackgroundColor,
         onTap: () {
-          print("object");
           if (data.onSelected != null) {
             data.onSelected!(item);
           }
@@ -57,9 +56,10 @@ class SideMenuItemTreeView extends StatelessWidget {
       
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: ExpansionTile(
-        // onExpansionChanged: (value) {
-        //   data.onTap(value);
-        // },
+        onExpansionChanged: (value) {
+          // data.onTap(value);
+          print("object");
+        },
         tilePadding: _getTilePadding(data.depth),
         leading: _buildIcon(item.icon),
         title: _buildTitle(item.title),
