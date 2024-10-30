@@ -40,6 +40,7 @@ class SideMenuItemTreeView extends StatelessWidget {
         onTap: () {
           if (data.onSelected != null) {
             data.onSelected!(item);
+            item.onTap;
           }
         },
       );
