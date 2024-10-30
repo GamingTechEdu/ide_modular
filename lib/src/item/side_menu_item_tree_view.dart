@@ -38,9 +38,9 @@ class SideMenuItemTreeView extends StatelessWidget {
         tileColor: data.backgroundColor,
         selectedTileColor: data.activeBackgroundColor,
         onTap: () {
+          print("object");
           if (data.onSelected != null) {
             data.onSelected!(item);
-            item.onTap;
           }
         },
       );
