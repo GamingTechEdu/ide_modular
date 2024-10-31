@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 class MenuContext extends StatelessWidget {
   final VoidCallback func;
   final String label;
-  const MenuContext({super.key, required this.func, required this.label});
+  final double? labelSize;
+  const MenuContext(
+      {super.key,
+      required this.func,
+      required this.label,
+      this.labelSize = 12});
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +55,10 @@ class MenuContext extends StatelessWidget {
                         padding: const EdgeInsets.all(2.0),
                         child: Text(
                           label,
-                          style: const TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontSize: labelSize,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
