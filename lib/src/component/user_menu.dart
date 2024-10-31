@@ -25,7 +25,7 @@ class _UserMenuState extends State<UserMenu> {
         offset: const Offset(0, 50),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: const Icon(
-          Icons.account_circle,
+          Icons.settings,
           size: 40,
         ),
         itemBuilder: (context) {
