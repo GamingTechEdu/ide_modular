@@ -1,8 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fluent_ui;
 import 'package:flutter/material.dart';
-
-import '../item/side_menu_item_admin.dart';
+import 'package:ide_modular/src/data/menu_user_data.dart';
 import '../utils/constants.dart';
 
 
@@ -11,10 +10,10 @@ abstract class SideMenuItemData {
 }
 
 class SideMenuItemDataTileDrag extends SideMenuItemData {
-  final List<AdminMenuItem> items;
+  final List<MenuUserData> items;
   final int index;
   final void Function(bool) onTap;
-  final void Function(AdminMenuItem item)? onSelected;
+  final void Function(MenuUserData item)? onSelected;
   final String selectedRoute;
   final int depth;
   final Color? iconColor;

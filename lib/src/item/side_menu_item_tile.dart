@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import '../data/side_menu_item_data.dart';
 import '../utils/constants.dart';
 
-
-///constrói os itens do menu lateral
 class SideMenuItemTile extends StatefulWidget {
   final SideMenuItemDataTile data;
   final bool isOpen;

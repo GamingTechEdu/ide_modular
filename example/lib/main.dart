@@ -1,15 +1,17 @@
+import 'dart:ui';
+
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:ide_modular/export.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
+    MaterialApp(
       home: SideMenuIde(),
     ),
   );
@@ -78,104 +80,130 @@ class _SideMenuIdeState extends State<SideMenuIde> {
     }
   }
 
+  bool isMenuVisible = false;
+
+  void toggleMenu() {
+    setState(() {
+      isMenuVisible = !isMenuVisible;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size.width;
     return fluent.FluentApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Row(
+        body: Stack(
           children: [
-            SideMenu(
-              maxWidth: 150,
-              hasResizer: false,
-              mode: screen < 1200 ? SideMenuMode.compact : SideMenuMode.open,
-              hasResizerToggle: true,
-              controller: controller,
-              backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-              builder: (data) {
-                return SideMenuData(
-                  items: [
-                    const SideMenuItemDataDivider(
-                      divider: Divider(
-                        indent: 10,
-                        endIndent: 10,
-                        height: 5,
-                        // thickness: 10,
-                        color: Color.fromARGB(255, 197, 197, 197),
-                      ),
-                    ),
-                    FluentTreeViewItemData(
-                      [
-                        fluent.TreeViewItem(
-                          expanded: false,
-                          content: const Text(
-                            "Manutenção",
-                            overflow: TextOverflow.ellipsis,
+            Row(
+              children: [
+                SideMenu(
+                  maxWidth: 150,
+                  hasResizer: false,
+                  mode:
+                      screen < 1200 ? SideMenuMode.compact : SideMenuMode.open,
+                  hasResizerToggle: true,
+                  controller: controller,
+                  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  builder: (data) {
+                    return SideMenuData(
+                      items: [
+                        const SideMenuItemDataDivider(
+                          divider: Divider(
+                            indent: 10,
+                            endIndent: 10,
+                            height: 5,
+                            color: Color.fromARGB(255, 197, 197, 197),
                           ),
-                          children: [
+                        ),
+                        FluentTreeViewItemData(
+                          [
                             fluent.TreeViewItem(
-                              content: const Text("Em Andamento",
-                                  overflow: TextOverflow.ellipsis),
+                              expanded: false,
+                              content: const Text(
+                                "Manutenção",
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              children: [
+                                fluent.TreeViewItem(
+                                  content: const Text("Em Andamento",
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                                fluent.TreeViewItem(
+                                  content: const Text("Atrasados",
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                                fluent.TreeViewItem(
+                                  content: const Text("Finalizados",
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                              ],
                             ),
                             fluent.TreeViewItem(
-                              content: const Text("Atrasados",
+                              expanded: false,
+                              content: const Text("Produção",
                                   overflow: TextOverflow.ellipsis),
+                              children: [
+                                fluent.TreeViewItem(
+                                  content: const Text("Em Andamento",
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                                fluent.TreeViewItem(
+                                  content: const Text("Atrasados",
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                                fluent.TreeViewItem(
+                                  content: const Text("Finalizados",
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                              ],
                             ),
                             fluent.TreeViewItem(
-                              content: const Text("Finalizados",
+                              expanded: false,
+                              content: const Text("Simcards",
                                   overflow: TextOverflow.ellipsis),
+                              children: [
+                                fluent.TreeViewItem(
+                                  content: const Text("Em Andamento",
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                                fluent.TreeViewItem(
+                                  content: const Text("Atrasados",
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                                fluent.TreeViewItem(
+                                  content: const Text("Finalizados",
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                              ],
                             ),
                           ],
-                        ),
-                        fluent.TreeViewItem(
-                          expanded: false,
-                          content: const Text("Produção",
-                              overflow: TextOverflow.ellipsis),
-                          children: [
-                            fluent.TreeViewItem(
-                              content: const Text("Em Andamento",
-                                  overflow: TextOverflow.ellipsis),
-                            ),
-                            fluent.TreeViewItem(
-                              content: const Text("Atrasados",
-                                  overflow: TextOverflow.ellipsis),
-                            ),
-                            fluent.TreeViewItem(
-                              content: const Text("Finalizados",
-                                  overflow: TextOverflow.ellipsis),
-                            ),
-                          ],
-                        ),
-                        fluent.TreeViewItem(
-                          expanded: false,
-                          content: const Text("Simcards",
-                              overflow: TextOverflow.ellipsis),
-                          children: [
-                            fluent.TreeViewItem(
-                              content: const Text("Em Andamento",
-                                  overflow: TextOverflow.ellipsis),
-                            ),
-                            fluent.TreeViewItem(
-                              content: const Text("Atrasados",
-                                  overflow: TextOverflow.ellipsis),
-                            ),
-                            fluent.TreeViewItem(
-                              content: const Text("Finalizados",
-                                  overflow: TextOverflow.ellipsis),
-                            ),
-                          ],
-                        ),
+                        )
                       ],
-                    )
-                  ],
-                  footer: const MenuUser(),
-                );
-              },
+                      footer: UserMenu(
+                        data: [
+                          MenuUserData(
+                            icon: Icons.info,
+                            title: "Sobre",
+                            onTap: () => toggleMenu(),
+                          ),
+                          MenuUserData(
+                            icon: Icons.info,
+                            title: "Teste",
+                            onTap: () => print("teste"),
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
+                Expanded(
+                  child: widget.child ?? Container(),
+                ),
+              ],
             ),
-            Expanded(
-              child: widget.child ?? Container(),
-            ),
+            if (isMenuVisible) MenuContext(func: () => toggleMenu())
           ],
         ),
       ),
@@ -183,60 +211,55 @@ class _SideMenuIdeState extends State<SideMenuIde> {
   }
 }
 
-
-List<AdminMenuItem> adminMenuItems = [
-  AdminMenuItem(
-    title: 'Sobre',
-    icon: Icons.info,
-    onTap: () => print("Teste"),
-  ),
-];
-
-class MenuUser extends StatelessWidget {
-  const MenuUser({super.key});
+class MenuContext extends StatelessWidget {
+  final VoidCallback func;
+  const MenuContext({super.key, required this.func});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      width: double.infinity,
-      child: PopupMenuButton<AdminMenuItem>(
-        tooltip: "Configurações",
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        color: const Color.fromARGB(255, 255, 255, 255),
-        elevation: 4,
-        offset: const Offset(0, 50),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        child: const Icon(
-          Icons.account_circle,
-          size: 40,
-        ),
-        itemBuilder: (context) {
-          return adminMenuItems.map((AdminMenuItem item) {
-            return PopupMenuItem<AdminMenuItem>(
-              value: item,
-              child: Row(
-                children: [
-                  Icon(
-                    item.icon,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      item.title,
-                      style: const TextStyle(
-                        fontSize: 14,
+    return Positioned.fill(
+      child: Container(
+        color: Colors.black.withOpacity(0.5),
+        child: Center(
+          child: Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              color: Colors.white,
+            ),
+            width: 500,
+            height: 300,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      disabledColor: Colors.transparent,
+                      onPressed: func,
+                      icon: const Icon(
+                        Icons.close,
+                        color: Colors.red,
                       ),
                     ),
-                  ),
-                  
-                ],
-              ),
-            );
-          }).toList();
-        },
+                  ],
+                ),
+                const SizedBox(height: 50),
+                const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.info, size: 60),
+                    SizedBox(height: 30),
+                    Text('Versão: 1.2.1+1'),
+                    SizedBox(height: 20),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

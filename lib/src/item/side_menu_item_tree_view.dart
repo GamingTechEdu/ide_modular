@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../data/menu_user_data.dart';
 import '../data/side_menu_item_data.dart';
 import 'side_menu_item_admin.dart';
 
@@ -26,7 +27,7 @@ class SideMenuItemTreeView extends StatelessWidget {
     );
   }
 
-  Widget _buildTiles(BuildContext context, AdminMenuItem item) {
+  Widget _buildTiles(BuildContext context, MenuUserData item) {
     bool selected = _isSelected(data.selectedRoute, [item]);
 
     if (item.children.isEmpty) {
@@ -66,7 +67,7 @@ class SideMenuItemTreeView extends StatelessWidget {
     );
   }
 
-  bool _isSelected(String route, List<AdminMenuItem> items) {
+  bool _isSelected(String route, List<MenuUserData> items) {
     for (final item in items) {
       if (item.route == route) {
         return true;
