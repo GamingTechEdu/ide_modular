@@ -42,7 +42,19 @@ class MenuContext extends StatelessWidget {
                   children: [
                     const Icon(Icons.info, size: 60),
                     const SizedBox(height: 30),
-                    Text(label),
+                    Container(
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 207, 207, 207),
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text(
+                          label,
+                          style: const TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 20),
                   ],
                 ),
