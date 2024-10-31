@@ -2,6 +2,7 @@ library ide_modular;
 
 export 'package:badges/badges.dart';
 export 'src/component/user_menu.dart';
+export 'src/component/menu_context.dart';
 export 'src/side_menu.dart';
 export 'src/item/export.dart';
 export 'src/side_menu_mode.dart';

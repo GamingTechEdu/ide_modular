@@ -203,7 +203,7 @@ class _SideMenuIdeState extends State<SideMenuIde> {
                 ),
               ],
             ),
-            if (isMenuVisible) MenuContext(func: () => toggleMenu())
+            if (isMenuVisible) MenuContext(func: () => toggleMenu(), label: "versão",)
           ],
         ),
       ),
@@ -211,56 +211,4 @@ class _SideMenuIdeState extends State<SideMenuIde> {
   }
 }
 
-class MenuContext extends StatelessWidget {
-  final VoidCallback func;
-  const MenuContext({super.key, required this.func});
 
-  @override
-  Widget build(BuildContext context) {
-    return Positioned.fill(
-      child: Container(
-        color: Colors.black.withOpacity(0.5),
-        child: Center(
-          child: Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-              color: Colors.white,
-            ),
-            width: 500,
-            height: 300,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      disabledColor: Colors.transparent,
-                      onPressed: func,
-                      icon: const Icon(
-                        Icons.close,
-                        color: Colors.red,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 50),
-                const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.info, size: 60),
-                    SizedBox(height: 30),
-                    Text('Versão: 1.2.1+1'),
-                    SizedBox(height: 20),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
