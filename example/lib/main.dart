@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ide_modular/export.dart';
+import 'package:menu_modular/export.dart';
 
 void main() {
   runApp(
@@ -98,7 +99,7 @@ class _SideMenuIdeState extends State<SideMenuIde> {
               children: [
                 SideMenu(
                   maxWidth: 150,
-                  hasResizer: false,
+                  hasResizer: true,
                   mode:
                       screen < 1200 ? SideMenuMode.compact : SideMenuMode.open,
                   hasResizerToggle: true,
@@ -209,34 +210,50 @@ class _SideMenuIdeState extends State<SideMenuIde> {
                   position: SideMenuPosition.right,
                   mode: SideMenuMode.open,
                   builder: (data) => SideMenuData(
-                    customChild: SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16),
-                        child: Row(
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.refresh),
-                              splashRadius: 20,
-                              tooltip: "Refresh",
-                              // color: Colors.white,
-                              onPressed: () {},
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.add),
-                              splashRadius: 20,
-                              tooltip: "Add New",
-                              // color: Colors.white,
-                              onPressed: () {},
-                            ),
-                            IconButton(
-                              splashRadius: 20,
-                              icon: const Icon(Icons.delete),
-                              tooltip: "Delete",
-                              // color: Colors.white,
-                              onPressed: () {},
-                            ),
-                          ],
-                        ),
+                    customChild: MenuFormBody(
+                      data: MenuFormData(
+                        paddingHorizontalHeader: 5,
+                        paddingExternalHeader:
+                            const EdgeInsets.only(bottom: 0.0),
+                        headerButtons: [
+                          HeaderRowDataButtons(
+                            onPressed: () => print("01"),
+                            icon: const Icon(Icons.add),
+                            backgroundColor: Colors.red,
+                          ),
+                          HeaderRowDataButtons(
+                            onPressed: () => print("02"),
+                            icon: const Icon(Icons.refresh),
+                            backgroundColor: Colors.green,
+                          ),
+                          HeaderRowDataButtons(
+                            onPressed: () => print("01"),
+                            icon: const Icon(Icons.add),
+                            backgroundColor: Colors.red,
+                          ),
+                          TextHeaderRowDataButtons(
+                              onTap: () {}, title: "Teste1")
+                        ],
+                        buttons: [
+                          MenuFormItemDataTile(
+                            title: "Incluir",
+                            icon: const Icon(Icons.add_box_outlined),
+                            onTap: () {},
+                          ),
+                          MenuFormItemDataTile(
+                              title: "Editar aaaaaaSIMUC",
+                              icon: const Icon(Icons.place),
+                              onTap: () {}),
+                          MenuFormItemDataTile(
+                              title: "Exportar Relatório",
+                              icon: const Icon(Icons.play_arrow),
+                              onTap: () {}),
+                          MenuFormItemDataTile(
+                            title: "Excluir SIMUC",
+                            icon: const Icon(Icons.cabin),
+                            onTap: () {},
+                          ),
+                        ],
                       ),
                     ),
                   ),

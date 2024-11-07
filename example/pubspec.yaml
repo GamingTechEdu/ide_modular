@@ -35,6 +35,9 @@ dependencies:
     sdk: flutter
   ide_modular:
     path: ../
+  menu_modular: 
+    git:
+      url: https://github.com/GamingTechEdu/menu_modular.git
 
 
   # The following adds the Cupertino Icons font to your application.
