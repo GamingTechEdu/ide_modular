@@ -3,15 +3,13 @@ import 'dart:ui';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:ide_modular/export.dart';
 
 void main() {
   runApp(
-    MaterialApp(
+    const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: SideMenuIde(),
     ),
   );
@@ -104,7 +102,6 @@ class _SideMenuIdeState extends State<SideMenuIde> {
                   mode:
                       screen < 1200 ? SideMenuMode.compact : SideMenuMode.open,
                   hasResizerToggle: true,
-                  controller: controller,
                   backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                   builder: (data) {
                     return SideMenuData(
@@ -199,16 +196,61 @@ class _SideMenuIdeState extends State<SideMenuIde> {
                   },
                 ),
                 Expanded(
-                  child: widget.child ?? Container(),
+                  child: ElevatedButton(
+                    child: const Text("Click"),
+                    onPressed: () => controller.open(),
+                  ),
+                ),
+                SideMenu(
+                  maxWidth: 350,
+                  hasResizer: true,
+                  controller: controller,
+                  hasResizerToggle: true,
+                  position: SideMenuPosition.right,
+                  mode: SideMenuMode.open,
+                  builder: (data) => SideMenuData(
+                    customChild: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16),
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.refresh),
+                              splashRadius: 20,
+                              tooltip: "Refresh",
+                              // color: Colors.white,
+                              onPressed: () {},
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.add),
+                              splashRadius: 20,
+                              tooltip: "Add New",
+                              // color: Colors.white,
+                              onPressed: () {},
+                            ),
+                            IconButton(
+                              splashRadius: 20,
+                              icon: const Icon(Icons.delete),
+                              tooltip: "Delete",
+                              // color: Colors.white,
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
-            if (isMenuVisible) MenuContext(func: () => toggleMenu(), label: "versão",)
+            if (isMenuVisible)
+              MenuContext(
+                func: () => toggleMenu(),
+                label: "versão",
+              )
           ],
         ),
       ),
     );
   }
 }
-
-

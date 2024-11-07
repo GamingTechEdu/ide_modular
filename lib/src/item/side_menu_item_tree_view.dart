@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../data/menu_user_data.dart';
 import '../data/side_menu_item_data.dart';
-import 'side_menu_item_admin.dart';
 
 class SideMenuItemTreeView extends StatelessWidget {
   final SideMenuItemDataTileDrag data;
