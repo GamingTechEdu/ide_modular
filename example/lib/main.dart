@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:fluent_ui/fluent_ui.dart' as fluent;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:ide_modular/export.dart';
 import 'package:menu_modular/export.dart';
@@ -80,10 +81,17 @@ class _SideMenuIdeState extends State<SideMenuIde> {
   }
 
   bool isMenuVisible = false;
+  EnumActions? selectedAction;
 
   void toggleMenu() {
     setState(() {
       isMenuVisible = !isMenuVisible;
+    });
+  }
+
+  void setAction(EnumActions action) {
+    setState(() {
+      selectedAction = action;
     });
   }
 
@@ -199,7 +207,10 @@ class _SideMenuIdeState extends State<SideMenuIde> {
                 Expanded(
                   child: ElevatedButton(
                     child: const Text("Click"),
-                    onPressed: () => controller.open(),
+                    onPressed: () => {
+                      controller.toggle(),
+                      _switchViews(EnumActions.none),
+                    },
                   ),
                 ),
                 SideMenu(
@@ -210,52 +221,49 @@ class _SideMenuIdeState extends State<SideMenuIde> {
                   position: SideMenuPosition.right,
                   mode: SideMenuMode.open,
                   builder: (data) => SideMenuData(
-                    customChild: MenuFormBody(
-                      data: MenuFormData(
-                        paddingHorizontalHeader: 5,
-                        paddingExternalHeader:
-                            const EdgeInsets.only(bottom: 0.0),
-                        headerButtons: [
-                          HeaderRowDataButtons(
-                            onPressed: () => print("01"),
-                            icon: const Icon(Icons.add),
-                            backgroundColor: Colors.red,
-                          ),
-                          HeaderRowDataButtons(
-                            onPressed: () => print("02"),
-                            icon: const Icon(Icons.refresh),
-                            backgroundColor: Colors.green,
-                          ),
-                          HeaderRowDataButtons(
-                            onPressed: () => print("01"),
-                            icon: const Icon(Icons.add),
-                            backgroundColor: Colors.red,
-                          ),
-                          TextHeaderRowDataButtons(
-                              onTap: () {}, title: "Teste1")
-                        ],
-                        buttons: [
-                          MenuFormItemDataTile(
-                            title: "Incluir",
-                            icon: const Icon(Icons.add_box_outlined),
-                            onTap: () {},
-                          ),
-                          MenuFormItemDataTile(
-                              title: "Editar aaaaaaSIMUC",
-                              icon: const Icon(Icons.place),
-                              onTap: () {}),
-                          MenuFormItemDataTile(
-                              title: "Exportar Relatório",
-                              icon: const Icon(Icons.play_arrow),
-                              onTap: () {}),
-                          MenuFormItemDataTile(
-                            title: "Excluir SIMUC",
-                            icon: const Icon(Icons.cabin),
-                            onTap: () {},
-                          ),
-                        ],
-                      ),
+                    header: SimpleIconButton(
+                      maxWidth: 50,
+                      minWidth: 100,
+                      options: [
+                        OptionItem(
+                          id: "1",
+                          value: "Teste",
+                          icon: Icons.add,
+                          onPressed: () => {
+                            controller.open(),
+                            _switchViews(EnumActions.add),
+                          },
+                        ),
+                        OptionItem(
+                          id: "1",
+                          value: "Teste",
+                          icon: Icons.refresh,
+                          onPressed: () => {
+                            controller.open(),
+                            _switchViews(EnumActions.refresh),
+                          },
+                        ),
+                        OptionItem(
+                          id: "1",
+                          value: "Teste",
+                          icon: Icons.edit,
+                          onPressed: () => {
+                            controller.open(),
+                            _switchViews(EnumActions.edit),
+                          },
+                        ),
+                        OptionItem(
+                          id: "1",
+                          value: "Teste",
+                          icon: Icons.delete,
+                          onPressed: () => {
+                            controller.open(),
+                            _switchViews(EnumActions.delete),
+                          },
+                        )
+                      ],
                     ),
+                    customChild: selectedWidget,
                   ),
                 ),
               ],
@@ -264,10 +272,95 @@ class _SideMenuIdeState extends State<SideMenuIde> {
               MenuContext(
                 func: () => toggleMenu(),
                 label: "versão",
-              )
+              ),
           ],
         ),
       ),
     );
   }
+
+  Widget selectedWidget = Container();
+
+  void _switchViews(EnumActions activeView) {
+    setState(() {
+      switch (activeView) {
+        case EnumActions.none:
+          selectedWidget = Container();
+          break;
+        case EnumActions.add:
+          selectedWidget = Container(
+            width: 200,
+            height: 100,
+            color: Colors.red,
+          );
+          break;
+        case EnumActions.refresh:
+          selectedWidget = Container(
+            width: 100,
+            height: 100,
+            color: Colors.blue,
+          );
+          break;
+        case EnumActions.edit:
+          selectedWidget = Container(
+            width: 100,
+            height: 100,
+            color: Colors.green,
+          );
+          break;
+        case EnumActions.delete:
+          selectedWidget = Container(
+            width: 100,
+            height: 100,
+            color: Colors.black,
+          );
+          break;
+      }
+    });
+  }
 }
+
+enum EnumActions { none, refresh, add, edit, delete }
+
+
+// MenuFormBody(
+//                       data: MenuFormData(
+//                         paddingHorizontalHeader: 5,
+//                         paddingExternalHeader:
+//                             const EdgeInsets.only(bottom: 0.0),
+//                         headerButtons: [
+//                           HeaderRowDataButtons(
+//                             onPressed: () => controller.open(),
+//                             icon: const Icon(Icons.add),
+//                             backgroundColor: Colors.red,
+//                           ),
+//                           HeaderRowDataButtons(
+//                             onPressed: () => print("02"),
+//                             icon: const Icon(Icons.refresh),
+//                             backgroundColor: Colors.green,
+//                           ),
+//                           TextHeaderRowDataButtons(
+//                               onTap: () {}, title: "Teste1")
+//                         ],
+//                         buttons: [
+//                           MenuFormItemDataTile(
+//                             title: "Incluir",
+//                             icon: const Icon(Icons.add_box_outlined),
+//                             onTap: () {},
+//                           ),
+//                           MenuFormItemDataTile(
+//                               title: "Editar aaaaaaSIMUC",
+//                               icon: const Icon(Icons.place),
+//                               onTap: () {}),
+//                           MenuFormItemDataTile(
+//                               title: "Exportar Relatório",
+//                               icon: const Icon(Icons.play_arrow),
+//                               onTap: () {}),
+//                           MenuFormItemDataTile(
+//                             title: "Excluir SIMUC",
+//                             icon: const Icon(Icons.cabin),
+//                             onTap: () {},
+//                           ),
+//                         ],
+//                       ),
+//                     ),
