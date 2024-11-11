@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:ide_modular/export.dart';
 import 'package:menu_modular/export.dart';
 
+import 'data_class.dart';
+
 void main() {
   runApp(
     const MaterialApp(
@@ -94,6 +96,8 @@ class _SideMenuIdeState extends State<SideMenuIde> {
       selectedAction = action;
     });
   }
+
+  Client? teste;
 
   @override
   Widget build(BuildContext context) {
@@ -208,6 +212,11 @@ class _SideMenuIdeState extends State<SideMenuIde> {
                   child: ElevatedButton(
                     child: const Text("Click"),
                     onPressed: () => {
+                      teste = Client(
+                          name: "Eduardo",
+                          address: "maksmckamc N9",
+                          email: "Eduardo@gmail.com",
+                          phone: "11953751486"),
                       controller.toggle(),
                       _switchViews(EnumActions.none),
                     },
@@ -215,9 +224,13 @@ class _SideMenuIdeState extends State<SideMenuIde> {
                 ),
                 SideMenu(
                   maxWidth: 350,
-                  hasResizer: true,
+                  hasResizer: false,
                   controller: controller,
                   hasResizerToggle: true,
+                  resizerToggleData: ResizerToggleData(
+                    controller: () => _switchViews(EnumActions.none),
+                    topPosition: 30
+                  ),
                   position: SideMenuPosition.right,
                   mode: SideMenuMode.open,
                   builder: (data) => SideMenuData(

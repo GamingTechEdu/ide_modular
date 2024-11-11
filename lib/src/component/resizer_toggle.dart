@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../data/resizer_toggle_data.dart';
 import '../utils/utils.dart';
 
-
 ///Cria o botão de resizerToggle
 class ResizerToggle extends StatefulWidget {
   const ResizerToggle({
@@ -14,7 +13,7 @@ class ResizerToggle extends StatefulWidget {
     ResizerToggleData? data,
   })  : data = data ?? const ResizerToggleData(),
         super(key: key);
-        
+
   final void Function() onTap;
   final bool rightArrow, leftPosition;
   final ResizerToggleData data;
@@ -31,7 +30,10 @@ class _ResizerToggleState extends State<ResizerToggle> {
     return PositionedDirectional(
       top: widget.data.topPosition,
       child: InkWell(
-        onTap: () => widget.onTap(),
+        onTap: () => {
+          widget.onTap(),
+          widget.data.controller!(),
+        },
         onHover: (hover) {
           setState(() {
             _visible = hover;

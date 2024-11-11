@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ide_modular/export.dart';
 
 class ResizerToggleData {
   const ResizerToggleData({
+    this.controller, 
     this.iconColor = Colors.black,
     this.topPosition = 20,
     this.opacity = 0.3,
@@ -12,4 +14,5 @@ class ResizerToggleData {
 
   final Color iconColor;
   final double topPosition, opacity, iconSize;
+  final VoidCallback? controller;
 }
